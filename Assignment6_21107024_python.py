@@ -147,21 +147,17 @@ obj2 = array_elements(arr = [-25, -10, -7, -3, 2, 4, 8, 10])
 array_elements.elements_zerosum(obj2)
 
 # Question 9
-class parentheses_str:
-    def __init__(self, str1):
-        # Instance Variable    
-        self.str1 = str1
-        
-    def is_valid(self):
-        if len(self.str1) % 2 == 0:
-            k = int(len(self.str1)/2)
-            for i in range(0, k):
-                if self.str1[i] != self.str1[i - len(self.str1)]:
-                    print("Invalid String")
-                    break
-            print("Valid String")
-        else:
-            print("Invalid String")
+class bracket_str:
+   def is_valid_parentheses(self, str1):
+        stack, p_char = [], {"(": ")", "{": "}", "[": "]"}
+        for bracket in str1:
+            if bracket in p_char:
+                stack.append(bracket)
+            elif len(stack) == 0 or p_char[stack.pop()] != bracket:
+                return False
+        return len(stack) == 0
 
-str_check = parentheses_str(input("Enter a string of parentheses: "))
-parentheses_str.is_valid(str_check)
+print(bracket_str().is_valid_parentheses("(){}[]"))
+print(bracket_str().is_valid_parentheses("()[{)}"))
+print(bracket_str().is_valid_parentheses("()"))
+print(bracket_str().is_valid_parentheses("([)]"))
